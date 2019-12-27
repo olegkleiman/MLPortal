@@ -2,6 +2,7 @@
  * @flow
  */
 import React, { useState, useEffect } from 'react';
+import { withRouter, useHistory } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -69,28 +70,57 @@ const useStyles = makeStyles(theme => ({
 }))
 
 type Props = {
-    isOpen: boolean
+    isOpen: boolean,
+    openChanged: Function
 }
+
+const topics = [
+  {
+    title: 'Introduction',
+    link: 'intro'
+  },
+  { 
+    title: 'Classification', 
+    link: 'classification'
+    }, 
+  { 
+    title: 'Regression', 
+    link: 'regression'
+    }, 
+  {
+    title: 'Ridge Regression', 
+    link: 'ridge'
+    }
+]
 
 const AppDrawer = (props: Props) => {
 
     const {isOpen} = props;
+    const callback = props.openChanged;
 
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(isOpen);
+    const history = useHistory();
 
-    // useEffect( () => {
-    //     setOpen({open})
-    // }, [open]); // Only re-run the effect if open state changes
+    useEffect( () => {
+        setOpen(isOpen)
+    }, [isOpen]); // Only re-run the effect if open state changes
 
     const handleDrawerClose = () => {
         setOpen(false);
+        if( callback )
+          callback()
+    }
+
+    const topicSelected = (evt) => {
+      handleDrawerClose()
+      history.push(`/${evt.link}`);
     }
 
     return  <Drawer variant="persistent"
-                anchor="rigth"
-                open={isOpen}>
+                anchor="left"
+                open={open}>
             <div className={classes.drawerHeader}>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -98,13 +128,13 @@ const AppDrawer = (props: Props) => {
             </div>
              <Divider />
              <List>
-                {['Classification', 'Regression', 'Ridge Regression'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
+                {topics.map((topic, index) => (
+                    <ListItem button key={topic.title} onClick={ () => topicSelected(topic)}>
+                        <ListItemText primary={topic.title} />
                     </ListItem>
                 ))}             
              </List>
         </Drawer>
 }
 
-export default AppDrawer;
+export default withRouter(AppDrawer);

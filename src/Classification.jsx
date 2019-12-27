@@ -1,5 +1,6 @@
 // @flow
 import React, {useState} from 'react';
+import { useTranslation } from "react-i18next";
 import '../node_modules/react-vis/dist/style.css';
 import {XYPlot, YAxis, XAxis, 
         VerticalGridLines,
@@ -53,6 +54,8 @@ const dataClassB = data.filter( point => {
 
 const Classification = () => {
 
+    const { t } = useTranslation();
+
     const [lineData, setLineData] = useState()
     const [weights, setWeights] = useState();
 
@@ -87,7 +90,7 @@ const Classification = () => {
 
     return (
         <div>
-            <div>Classification</div>
+            <div>{t('Classification')}</div>
             <XYPlot height={300} width={300}>
                 <MarkSeries animation={'noWobble'}
                             className="responsive-vis-scatterplot"

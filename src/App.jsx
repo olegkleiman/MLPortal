@@ -25,7 +25,10 @@ import { useTranslation, initReactI18next } from "react-i18next";
 import translations from './translations';
 import AppDrawer from './AppDrawer';
 import Home from './Home';
+import Introduction from './Introduction';
 import Classification from './Classification';
+import Regression from './Regression';
+import Ridge from './Ridge';
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -41,10 +44,14 @@ i18n
 const App = (props) => {
 
     const { t } = useTranslation();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
+    }
+
+    const drawerClosed = () => {
+        setOpen(false)
     }
 
     return <>
@@ -62,10 +69,13 @@ const App = (props) => {
                 </Link>                              
             </Toolbar>
         </AppBar>
-        <AppDrawer isOpen={open} />
+        <AppDrawer isOpen={open} openChanged={drawerClosed} />
         <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/class' component={Classification} />
+            <Route path='/intro' component={Introduction} />
+            <Route path='/classification' component={Classification} />
+            <Route path='/regression' component={Regression} />
+            <Route path='/ridge' component={Ridge} />
         </Switch>
     </>
 }
