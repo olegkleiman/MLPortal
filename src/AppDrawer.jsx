@@ -2,7 +2,8 @@
  * @flow
  */
 import React, { useState, useEffect } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -74,9 +75,10 @@ type Props = {
     openChanged: Function
 }
 
+
 const topics = [
   {
-    title: 'Introduction',
+    title: 'Intro',
     link: 'intro'
   },
   { 
@@ -88,12 +90,14 @@ const topics = [
     link: 'regression'
     }, 
   {
-    title: 'Ridge Regression', 
+    title: 'RigdeRegression', 
     link: 'ridge'
-    }
+  }
 ]
 
 const AppDrawer = (props: Props) => {
+
+    const { t } = useTranslation();
 
     const {isOpen} = props;
     const callback = props.openChanged;
@@ -130,11 +134,11 @@ const AppDrawer = (props: Props) => {
              <List>
                 {topics.map((topic, index) => (
                     <ListItem button key={topic.title} onClick={ () => topicSelected(topic)}>
-                        <ListItemText primary={topic.title} />
+                        <ListItemText primary={ t(topic.title) } />
                     </ListItem>
                 ))}             
              </List>
         </Drawer>
 }
 
-export default withRouter(AppDrawer);
+export default AppDrawer;

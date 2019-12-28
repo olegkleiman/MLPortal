@@ -6,8 +6,12 @@ import {XYPlot, YAxis, XAxis,
         VerticalGridLines,
         HorizontalGridLines,
         MarkSeries, LineSeries, LabelSeries} from 'react-vis';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';   
+import Typography from '@material-ui/core/Typography';  
+
+import {Tex} from 'react-tex';
 
 import Perceptron from './Perceptron';
 import * as ActivationFunctions from './ActivationFunctions';
@@ -88,35 +92,45 @@ const Classification = () => {
         setLineData(_lineData)
     }
 
+    let latexString = "\\vec\\theta^{t+1} = \\theta^t - \\alpha \\dfrac{\\partial E(x, \\theta^t)}{\\partial \\theta}";
+
     return (
-        <div>
-            <div>{t('Classification')}</div>
-            <XYPlot height={300} width={300}>
-                <MarkSeries animation={'noWobble'}
-                            className="responsive-vis-scatterplot"
-                            colorType="literal"
-                            color='green'
-                            onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
-                            data={dataClassA} />
-                <MarkSeries animation={'noWobble'}
-                            className="responsive-vis-scatterplot"
-                            colorType="literal"
-                            color='blue'
-                            onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
-                            data={dataClassB} />                            
-                <LineSeries data={lineData} color='red'/> 
-                <VerticalGridLines />
-                <HorizontalGridLines />                          
-                <XAxis />        
-                <YAxis />                    
-            </XYPlot>
-            <Button variant="outlined" color="primary"
-                    onClick={ () => classify() }>Classify</Button>
-            <Button variant="outlined" color="primary"
-                onClick={ (ev) => reStart(ev)}>Re-start
-            </Button>
-            <ANNResults weights={weights} />
-        </div>
+        <Grid container spacing={3}>
+            <Grid item>
+                <XYPlot height={300} width={300}>
+                    <MarkSeries animation={'noWobble'}
+                                className="responsive-vis-scatterplot"
+                                colorType="literal"
+                                color='green'
+                                onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
+                                data={dataClassA} />
+                    <MarkSeries animation={'noWobble'}
+                                className="responsive-vis-scatterplot"
+                                colorType="literal"
+                                color='blue'
+                                onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
+                                data={dataClassB} />                            
+                    <LineSeries data={lineData} color='red'/> 
+                    <VerticalGridLines />
+                    <HorizontalGridLines />                          
+                    <XAxis />        
+                    <YAxis />                    
+                </XYPlot>
+                <Button variant="outlined" color="primary"
+                        onClick={ () => classify() }>Classify</Button>
+                <Button variant="outlined" color="primary"
+                    onClick={ (ev) => reStart(ev)}>Re-start
+                </Button>
+                <ANNResults weights={weights} />
+            </Grid>
+            <Grid item xs>
+                <Typography variant="h6" gutterBottom>{t('Classification')}</Typography>
+                <Divider />
+                <Typography>{t('classification_1')}</Typography>
+                <Tex texContent={latexString}/>
+            </Grid>
+
+        </Grid>
     )
 }
 

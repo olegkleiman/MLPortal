@@ -7,6 +7,8 @@ const translations = {
             "Regression": "Regression",
             "Classification": "Classification",
             "RigdeRegression": "Rigde Regression",
+            "classification_1": "Classification is the task of supervised learning where with discrete target variable",
+            "regression_1": "Regtesssoin is the task of supervised learning where with continious target variable",
         }
     },
     ru: {
@@ -17,6 +19,8 @@ const translations = {
             "Regression": "Регрессия",
             "Classification": "Классификация",
             "RigdeRegression": "Гребневая регрессия",
+            "classification_1": "Классификация является задачей машинного обучения с дискретным набором выходных значений (меток).",
+            "regression_1": "Regtesssoin is the task of supervised learning where with continious target variable",
         }
     }
 }

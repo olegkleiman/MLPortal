@@ -5,20 +5,14 @@ import React, { useState } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, fade, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 
 import i18n from 'i18next';
 import { useTranslation, initReactI18next } from "react-i18next";
@@ -41,10 +35,30 @@ i18n
     }
   })
 
+const useStyles = makeStyles( theme => ({
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+        display: 'block',
+    },
+  },    
+})
+)
+
 const App = (props) => {
 
     const { t } = useTranslation();
+    const classes = useStyles();
+    const theme = useTheme();
+
     const [open, setOpen] = useState(false);
+    const [language, setLanguage] = useState('ru');
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -54,19 +68,33 @@ const App = (props) => {
         setOpen(false)
     }
 
+    const changeLanguage = (evt) => {
+        
+        const nextLanguage = language == 'ru' ? 'en' : 'ru';
+        
+        i18n.use(initReactI18next) 
+            .init({lng: language});
+
+        setLanguage(nextLanguage);    
+
+    }
+
     return <>
         <AppBar position="static">
             <Toolbar>
                 <IconButton color="inherit" aria-label="Open drawer"
+                            className={classes.menuButton}
                             edge="start"
                             onClick={handleDrawerOpen}>
                     <MenuIcon />
                 </IconButton>
-                <Link to={'/'} style={{textDecoration: 'none'}}>
-                    <Typography variant="h6" noWrap>
+                <Link to={'/'} style={{textDecoration: 'none', color:'white'}}>
+                    <Typography variant="h6" className={classes.title} >
                         {t('PortalName')}
                     </Typography>
-                </Link>                              
+                </Link>  
+                <div className={classes.grow} />
+                <Button color="inherit" onClick={changeLanguage}>{language}</Button>                            
             </Toolbar>
         </AppBar>
         <AppDrawer isOpen={open} openChanged={drawerClosed} />
