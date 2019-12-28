@@ -1,5 +1,6 @@
 // @flow
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from "react-i18next";
 import '../node_modules/react-vis/dist/style.css';
 import {XYPlot, YAxis, XAxis, 
@@ -115,7 +116,7 @@ const Classification = () => {
                     <YAxis />                    
                 </XYPlot>
                 <Button variant="outlined" color="primary"
-                        onClick={ () => classify() }>{t('classification.solve')}</Button>
+                        onClick={ () => classify() }>{t('solve')}</Button>
                 <Button variant="outlined" color="primary"
                     onClick={ (ev) => reStart(ev)}>{t('classification.shuffle')}
                 </Button>
@@ -129,53 +130,29 @@ const Classification = () => {
                         {t('classification.1')}
                     </Trans>
                 </Typography> 
-                <Typography variant="body1" gutterBottom>
-                    {t('classification.5')}
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                    <Tex texContent={'\\vec\\theta^{t+1} = \\theta^t - \\alpha \\dfrac{\\partial E(x, \\theta^t)}{\\partial \\theta}'}/>
-                </Typography>                    
-                <Typography variant="body1" gutterBottom>
-                    {t('classification.6')}
+                <Tex texContent={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />,
+                <Typography>
+                    {t('where') } 
+                    <Tex texContent={`\\hat y`} /> 
+                    {t('classification.2') }
+                    {t('classification.and') } 
+                    <Tex texContent={`y`} /> 
+                    {t('classification.3') } 
                 </Typography>
                 <Typography>
-                    {t('classification.7') } <Tex texContent={`\\vec \\theta`} />
-                    {t('classification.8') } <Tex texContent={`\\vec \\theta=[w_0,w_1,...,w_n]`} />
-                    {t('classification.then') }
+                    {t('classification.4') }
+                    <Tex texContent={`J(w)`} />
                 </Typography>
                 <Typography>
-                    <Tex texContent={`w^k_{i+1}=w^k_i-\\alpha \\frac{\\partial E}{\\partial w^k}`} />
+                    {t('classification.41') }
                 </Typography>
+                <Tex texContent={`J'(w)=0`} />
                 <Typography>
-                    {t('classification.10') }:
-                </Typography>
-                <Typography>
-                    <Tex texContent={`E(X,\\theta)= \\frac{1}{2N}\\sum_{i=0}^N(\\hat{y}-y)^2`} />
-                </Typography>
-                <Typography>
-                    {t('classification.where') } 
-                    <Tex texContent={`y_i`} />
-                    {t('classification.11') }
-                    <Tex texContent={`(\\vec{x_i}, y_i)`} /> {t('classification.and') }
-                    <Tex texContent={`\\hat{y}`} /> {t('classification.12')} <Tex texContent={`\\vec{x_i}`} />.
-                </Typography>
-                <Typography>
-                  {t('classification.thus')}:
-                </Typography>
-                <Typography>
-                    <Tex texContent={`\\frac{\\partial E(X, \\theta)}{\\partial w^k_{ij}}=\\frac{1}{N}\\sum_{d=1}^N\\frac{\\partial}{\\partial w^k_{ij}}(\\frac{1}{2}(\\hat{y}_d-y)^2)=\\frac{1}{N}\\sum_{d=1}^N\\frac{\\partial E_d}{\\partial w^k_{ij}}`} />
-                </Typography>
-                <Typography>
-                  {t('classification.13')}:
-                </Typography>
-                <Typography>
-                    <Tex texContent={`\\frac{\\partial E}{\\partial w^k_{ij}}=\\frac{\\partial E}{\\partial S^k_j} \\frac{\\partial S^k_j}{\\partial w^k_{ij}}`} />,
-                </Typography>                    
-                <Typography>
-                    {t('classification.where') } <Tex texContent={`S^k_j`} />
-                    {t('classification.14')} <Tex texContent={`j`} /> {t('classification.15')} <Tex texContent={`k`} /> 
-                    {t('classification.16')}
-                </Typography>
+                    {t('classification.42') }  
+                    <Link to={'/grad'}>
+                        {t('classification.43') }
+                    </Link>
+                </Typography>                
             </Grid>
         </Grid>
     )

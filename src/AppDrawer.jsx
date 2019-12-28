@@ -92,6 +92,10 @@ const topics = [
   {
     title: 'RigdeRegression', 
     link: 'ridge'
+  },
+  {
+    title: "GradientDescent",
+    link: "grad"
   }
 ]
 
