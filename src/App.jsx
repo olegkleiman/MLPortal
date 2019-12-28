@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+import moment from 'moment';
+
 import { makeStyles, fade, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -31,7 +33,14 @@ i18n
     lng: "en",
     debug: true,
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
+      ransSupportBasicHtmlNodes: true,
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
+      format: function(value, format, lng) {
+          if( format === 'uppercase') return value.toUpperCase();
+          if( value instanceof Date) return moment(value).format(format);
+          return value;
+      }
     }
   })
 

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { useTranslation, Trans } from "react-i18next";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -11,7 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    maxWidth: 450,
   },
 });
 
@@ -23,6 +24,8 @@ const ANNResults = (props: Props) => {
     const {weights} = props;
     if( weights == null ) 
         return null;
+
+    const { t } = useTranslation();
 
     const classes = useStyles();
 
@@ -44,7 +47,7 @@ const ANNResults = (props: Props) => {
             <Table className={classes.table} stickyHeader>
                 <TableHead>
                    <TableRow>
-                    <TableCell align="center" colSpan={2}>Weights</TableCell>
+                    <TableCell align="center" colSpan={2}>{t('classification.weights')}</TableCell>
                    </TableRow>
                 </TableHead>
                 <TableBody>
