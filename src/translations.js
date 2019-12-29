@@ -2,6 +2,7 @@ const translations = {
     en: {
         translation: {
             "Switch": "Russian",
+            "Home": "Home",
             "PortalName": "ML Portal",
             "Intro": "Introduction",
             "Regression": "Regression",
@@ -29,9 +30,10 @@ const translations = {
                 "2": " - network parameters at ",
                 "3": " iteration of gradient descent",
                 "4": "Note that this is a vector equation where each element is changed as part of vector",
-                "41": " - descent step - a small number that selected empirically (usually, 0.01 is good)",
-                "42": "function ",
-                "43": " is assumed to be convex( although ",
+                "41": " - descent step - a small number that selected empirically",
+                "42": "  Usually 0.01 is good strating choice, but from the theretical point of view, the step is selected by Lipschitz constraints:",
+                "421": "function ",
+                "43": " The differentiable function is assumed to be convex( although ",
                 "44": "in this paper ",
                 "45": "the authors consider the convergence of the method for non-convex functions)",
                 "5": ", thus, if ",
@@ -56,7 +58,8 @@ const translations = {
                 "22": " connects the output of unit",
                 "23": " to input of unit",
                 "24": "For a meanwhile полученное выражение для частной производной получены в общем виде, не подразумевая никаких допущений о функции активации. Что же касается функции ошибки, то очевидно, она должна быть определена для каждого конкретного случая",
-                
+                "25": " eigenvestor estimator for operator",
+                "26": " guarantees decrease",
             },
             "backprop": {
                 "1": "Этот метод является одним из самых главных алгоритмов машинного обучения. Он является алгоритмом вычисления ",
@@ -64,7 +67,7 @@ const translations = {
                 "3": " The term 'back-propagation' is often misunderstood as meaning the whole learning algorithm for the network. Actually, back-propagation refers only to the method for computing the gradient, while another algorithms, such as SGD, is used to perform learning using this gradient.",
                 "4": "Applying ",
                 "5": "gradient descent method ",
-                "6": " for miniization loss function defined as mean square error:",
+                "6": " for miniization loss function defined as mean square error",
                 "7": "Now according to the chain rule of calculus:",
             },
             "graph": {
@@ -76,6 +79,7 @@ const translations = {
             "and": " and ",
             "_and": " a ",
             "thus": "Тhus",
+            "so_that": "so that",
             "then": ", then ",
             "although": "although",
             "solve": "Solve",
@@ -84,6 +88,7 @@ const translations = {
     ru: {
         translation: {
             "Switch": "English",
+            "Home": "",
             "PortalName": "ML Portal (ru)",
             "Intro": "Введение",
             "Regression": "Регрессия",
@@ -110,10 +115,11 @@ const translations = {
                 "1": "Основная идея метода градиентного спуска состоит в обновлении вектора весов на величину, обратную к направлению градиента:",
                 "2": " - параметры сети на ",
                 "3": " итерации градиентного спуска",
-                "4": "Обратим внимание на то, что это векторная запись уравнения, в котором производится изменение каждого элемента вектора",
-                "41": " - шаг спуска - число, которое эмпирически выбирают достаточно маленьким (обычно можно начать с 0.01)",
-                "42": "функция ",
-                "43": "предполагается быть выпуклой (хотя ",
+                "4": "Обратим внимание на то, что [1] - это векторная запись уравнения, в котором производится изменение каждого элемента вектора",
+                "41": " - шаг спуска - число, которое выбирают эмпирически",
+                "42": " Обычно можно начать с 0.01, но с теоретической точки зрения шаг спуска подбирают на основании условий Липшица:",
+                "421": "функция ",
+                "43": " Дифференцируемая функция предполагается выпуклой (хотя ",
                 "44": "в этой работе ",
                 "45": "авторы рассматривают сходимость метода и для невыпуклых функций)", 
                 "5": ", т.е. если ",
@@ -138,6 +144,8 @@ const translations = {
                 "22": " связывает выход ячейки",
                 "23": " со входом ячейки",
                 "24": "Пока что полученное выражение для частной производной получены в общем виде, не подразумевая никаких допущений о функции активации. Что же касается функции ошибки, то очевидно, она должна быть определена для каждого конкретного случая",
+                "25": " оценка собственных значений оператора",
+                "26": " гарантирует убывание",
             },
             "backprop": {
                 "1": "Этот метод является одним из самых главных алгоритмов машинного обучения. Он является алгоритмом вычисления ",
@@ -145,7 +153,7 @@ const translations = {
                 "3": "Обратим внимание, что часто под термином 'back-propagation' неправильно понимается весь алгоритм обучения сети, в том время как back-propagation в общем виде вычисляет градиент функции, а для обучения применяется другой алгоритм, (такой как, например, SGD), который использует вычисленный градиент.",
                 "4": "Применим ",
                 "5": "метод градиентного спуска ",
-                "6": "для минимизации среднеквадратичой функции потерь:",
+                "6": "для минимизации среднеквадратичой функции потерь",
                 "7": "Далее, по правилу дифференцирования сложной функции",
             },
             "graph": {
@@ -157,6 +165,7 @@ const translations = {
             "and": " и ",
             "_and": " a ",
             "thus": "таким образом",
+            "so_that": "что",
             "then": ", то ",
             "although": "хотя",
             "solve": "Решить",

@@ -23,12 +23,11 @@ const BackProp = (props) => {
     return (
         <Grid container spacing={3}>
             <Grid item>
-                <ReactPlayer url={BackPropImage} playing={plaing} onClick={tooglePlay} loop={true} />
+                <ReactPlayer url={BackPropImage} playing={plaing} onClick={tooglePlay} loop={true} 
+                    width='500px'/>
                 <div>Click on image to stop/continue playing</div>
             </Grid>
             <Grid  item xs>
-                <Typography variant="h6" gutterBottom>{t('BackProp')}</Typography>
-                <Divider />
                 <Typography variant="body1">
                     {t('backprop.1')}
                     <Link to={'/grad'}>
@@ -44,13 +43,16 @@ const BackProp = (props) => {
                     <Link to='/grad'>
                         {t('backprop.5')}
                     </Link>
-                    {t('backprop.6')}.
+                    {t('backprop.6')}
                 </Typography> 
                 <Tex texContent={`E(X,\\theta)= \\frac{1}{2N}\\sum_{i=0}^N(\\hat{y}-y)^2`} />
                 <Typography> 
-                    {t('backprop.7')}.
-                </Typography> 
-                <Tex texContent={`\\frac{\\partial E(X, \\theta)}{\\partial w^k_{ij}}=\\frac{1}{N}\\sum_{d=1}^N\\frac{\\partial}{\\partial w^k_{ij}}(\\frac{1}{2}(\\hat{y}_d-y)^2)=\\frac{1}{N}\\sum_{d=1}^N\\frac{\\partial E_d}{\\partial w^k_{ij}}`} />
+                    {t('where')} <Tex texContent={`y_i`} /> {t('grad.7')}
+                    <Tex texContent={`(\\vec{x_i}, y_i)`} /> {t('and') }
+                    <Tex texContent={`\\hat{y}`} /> {t('grad.171')} <Tex texContent={`\\vec{x_i}`} />.
+                </Typography>
+                <br />
+                    <Tex texContent={`\\frac{\\partial E(X, \\theta)}{\\partial w^k_{ij}}=\\frac{1}{N}\\sum_{d=1}^N\\frac{\\partial}{\\partial w^k_{ij}}(\\frac{1}{2}(\\hat{y}_d-y)^2)=\\frac{1}{N}\\sum_{d=1}^N\\frac{\\partial E_d}{\\partial w^k_{ij}}`} />
                 <Typography>
                     {t('where') } <Tex texContent={`S^k_j`} />
                     {t('grad.9')} <Tex texContent={`j`} /> {t('grad.10')} <Tex texContent={`k`} /> 

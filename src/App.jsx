@@ -29,6 +29,8 @@ import Gradient from './Gradient';
 import BackProp from './BackProp';
 import Graph from './Graph';
 
+import topics from './assets/data/topics.json';
+
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
@@ -48,6 +50,14 @@ i18n
   })
 
 const useStyles = makeStyles( theme => ({
+    home: {
+        textDecoration: 'none', 
+        color:'white'
+    },    
+    topic: {
+        flexGrow: 1,
+        align: "center",
+    },    
     grow: {
         flexGrow: 1,
     },
@@ -59,11 +69,18 @@ const useStyles = makeStyles( theme => ({
         [theme.breakpoints.up('sm')]: {
         display: 'block',
     },
+
   },    
 })
 )
 
 const App = (props) => {
+
+    const path = props.location.pathname;
+    const topic = topics.filter( topic => {
+        return topic.link == path;
+    })
+    const topicName = topic.length > 0 ? topic[0].title : ""
 
     const { t } = useTranslation();
     const classes = useStyles();
@@ -100,12 +117,15 @@ const App = (props) => {
                             onClick={handleDrawerOpen}>
                     <MenuIcon />
                 </IconButton>
-                <Link to={'/'} style={{textDecoration: 'none', color:'white'}}>
+                <Link to={'/'} className={classes.home}>
                     <Typography variant="h6" className={classes.title} >
                         {t('PortalName')}
                     </Typography>
                 </Link>  
                 <div className={classes.grow} />
+                <Typography className={classes.topic}>
+                    {t(topicName)}
+                </Typography>
                 <Button color="inherit" onClick={changeLanguage}>{language}</Button>                            
             </Toolbar>
         </AppBar>

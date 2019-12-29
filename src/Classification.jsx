@@ -123,8 +123,6 @@ const Classification = () => {
                 <ANNResults weights={weights} />
             </Grid>
             <Grid item xs>
-                <Typography variant="h6" gutterBottom>{t('Classification')}</Typography>
-                <Divider />
                 <Typography variant="body1">
                     <Trans i18nKey="classification.1">
                         {t('classification.1')}

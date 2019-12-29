@@ -1,0 +1,30 @@
+[
+    {
+      "title": "Intro",
+      "link": "/intro"
+    },
+    { 
+      "title": "Classification", 
+      "link": "/classification"
+      }, 
+    { 
+      "title": "Regression", 
+      "link": "/regression"
+      }, 
+    {
+      "title": "RigdeRegression", 
+      "link": "/ridge"
+    },
+    {
+      "title": "GradientDescent",
+      "link": "/grad"
+    },
+    {
+      "title": "BackProp",
+      "link": "/backprop"
+    },
+    {
+      "title": "Graph",
+      "link": "/graph"
+    }
+]
