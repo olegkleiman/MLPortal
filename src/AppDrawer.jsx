@@ -100,6 +100,10 @@ const topics = [
   {
     title: "BackProp",
     link: "backprop"
+  },
+  {
+    title: "Graph",
+    link: "graph"
   }
 ]
 

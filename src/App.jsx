@@ -27,6 +27,7 @@ import Regression from './Regression';
 import Ridge from './Ridge';
 import Gradient from './Gradient';
 import BackProp from './BackProp';
+import Graph from './Graph';
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -117,6 +118,7 @@ const App = (props) => {
             <Route path='/ridge' component={Ridge} />
             <Route path='/grad' component={Gradient} />
             <Route path='/backprop' component={BackProp} />
+            <Route path='/graph' component={Graph} />
         </Switch>
     </>
 }

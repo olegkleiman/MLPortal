@@ -135,7 +135,7 @@ const Classification = () => {
                     {t('where') } 
                     <Tex texContent={`\\hat y`} /> 
                     {t('classification.2') }
-                    {t('classification.and') } 
+                    {t('and') } 
                     <Tex texContent={`y`} /> 
                     {t('classification.3') } 
                 </Typography>
