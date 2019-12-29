@@ -96,6 +96,10 @@ const topics = [
   {
     title: "GradientDescent",
     link: "grad"
+  },
+  {
+    title: "BackProp",
+    link: "backprop"
   }
 ]
 

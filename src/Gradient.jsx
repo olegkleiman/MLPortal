@@ -24,7 +24,7 @@ const Gradient = (props) => {
                 <Tex texContent={'\\vec\\theta^{t+1} = \\theta^t - \\alpha \\dfrac{\\partial E(x, \\theta^t)}{\\partial \\theta}'}/>
                 <Typography variant="body1">
                    {t('where')} <Tex texContent={`\\vec \\theta`} /> {t('grad.2')}
-                   <Tex texContent={`t+1`} /> {t('grad.3')}
+                   <Tex texContent={`t+1`} /> {t('grad.3')}.
                 </Typography>
                 <Typography>
                     {t('grad.4') } <Tex texContent={`\\vec \\theta`} />
@@ -43,7 +43,7 @@ const Gradient = (props) => {
                     <Tex texContent={`y_i`} />
                     {t('grad.7') }
                     <Tex texContent={`(\\vec{x_i}, y_i)`} /> {t('and') }
-                    <Tex texContent={`\\hat{y}`} /> {t('classification.12')} <Tex texContent={`\\vec{x_i}`} />.
+                    <Tex texContent={`\\hat{y}`} /> {t('grad.18')} <Tex texContent={`\\vec{x_i}`} />.
                 </Typography>
                 <Typography>
                   {t('thus')}:
@@ -58,7 +58,43 @@ const Gradient = (props) => {
                     {t('grad.9')} <Tex texContent={`j`} /> {t('grad.10')} <Tex texContent={`k`} /> 
                     {t('grad.11')}
                 </Typography>
-
+                <Typography>
+                    {t('grad.12')}
+                </Typography>
+                <Tex texContent={`\\delta^k_j = \\frac{\\partial E}{\\partial S^k_j}`} />
+                <Typography>
+                    {t('grad.13')}
+                </Typography>
+                <Tex texContent={`\\frac{\\partial S^k_j}{\\partial w^k_{ij}}=\\frac{\\partial}{\\partial w^k_{ij}} (\\sum^{r_{k-1}}_{l=0} w^k_{lj} o^{k-1}_l)=o^{k-1}_{i}`} />
+                <Typography>
+                    {t('where')} <Tex texContent={`o^k_i`} />
+                    {t('grad.14')} <Tex texContent={`i`} />
+                    {t('grad.15')} <Tex texContent={`k`} />
+                    {t('_and')} <Tex texContent={`r_k`} /> {t('grad.16')} <Tex texContent={`k`} />.
+                </Typography>
+                <Typography>
+                    {t('thus')}
+                </Typography>
+                <Tex texContent={`\\frac{\\partial E}{\\partial w^k_{ij}}=\\delta^k_jo^{k-1}_i`} />  
+                <Typography>
+                    {t('grad.17')} <Tex texContent={`\\delta^k_j`} /> 
+                    {t('grad.18')} <Tex texContent={`j`}  />
+                    {t('grad.10')} <Tex texContent={`k`} /> ,
+                    {t('grad.19')} <Tex texContent={`o^{k-1}_i`} />
+                    {t('grad.20')} <Tex texContent={`j`} />
+                    {t('grad.15')} <Tex texContent={`k-1`} />!
+                </Typography>
+                <Typography>
+                    {t('grad.21')} <Tex texContent={`w^k_{ij}`} /> 
+                    {t('grad.22')} <Tex texContent={`i`}  />
+                    {t('grad.10')} <Tex texContent={`k-1`}  />
+                    {t('grad.23')} <Tex texContent={`j`}  />
+                     {t('grad.10')} <Tex texContent={`k`}  />.
+                </Typography>
+                <Divider />
+                <Typography>
+                    {t('grad.24')}
+                </Typography>                    
             </Grid>
         </Grid>
     )
