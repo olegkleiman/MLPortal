@@ -11,6 +11,9 @@ const translations = {
             "GradientDescent": "Gradient Descent",
             "BackProp": "Back-Propagation",
             "Graph": "Computational Graph",
+            "intro": {
+                "1": "",
+            },
             "classification": {
                 "1": "Classification is the task of supervised learning with <strong>discrete</strong> target variable.",
                 "2": " - исходное значение из выборки",
@@ -97,6 +100,9 @@ const translations = {
             "GradientDescent": "Градиентный спуск",
             "BackProp": "Метод обратного распространения ошибки",
             "Graph": "Вычислительный граф",
+            "intro": {
+                "1": "",
+            },
             "classification": {
                 "1": "Классификация является задачей машинного обучения с <strong>дискретным</strong> набором выходных значений (меток). Как и для задачи регрессии, основой решения будет воссоздание функции зависимости. Для этого строится разделяющая прямая/плоскость/гипер-плоскость/гипер-поверхность, которая является приближением исходной зависимости в смысле минимизации средне-квадратичного отклонения ошибки:",
                 "2": " - исходное значение из выборки",
