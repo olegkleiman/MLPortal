@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';  
 
 import {Tex} from 'react-tex';
+import MathJax from 'react-mathjax';
 
 import Perceptron from './Perceptron';
 import * as ActivationFunctions from './ActivationFunctions';
@@ -95,6 +96,7 @@ const Classification = () => {
 
     return (
         <Grid container spacing={3}>
+            <MathJax.Provider>
             <Grid item>
                 <XYPlot height={300} width={300}>
                     <MarkSeries animation={'noWobble'}
@@ -128,7 +130,7 @@ const Classification = () => {
                         {t('classification.1')}
                     </Trans>
                 </Typography> 
-                <Tex texContent={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />,
+                <MathJax.Node formula={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />,
                 <Typography>
                     {t('where') } 
                     <Tex texContent={`\\hat y`} /> 
@@ -152,6 +154,7 @@ const Classification = () => {
                     </Link>
                 </Typography>                
             </Grid>
+            </MathJax.Provider>
         </Grid>
     )
 }

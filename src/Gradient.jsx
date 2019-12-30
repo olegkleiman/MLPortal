@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'; 
 import Divider from '@material-ui/core/Divider';
 
+import MathJax from 'react-mathjax';
 import {Tex} from 'react-tex';
 
 const Gradient = (props) => {
@@ -13,6 +14,7 @@ const Gradient = (props) => {
 
     return (
         <Grid container spacing={3}>
+        <MathJax.Provider>
             <Grid item>
                 <img src='http://rasbt.github.io/mlxtend/user_guide/general_concepts/gradient-optimization_files/ball.png'
                     height='200px'/>
@@ -22,7 +24,7 @@ const Gradient = (props) => {
                     {t('grad.1')}
                 </Typography> 
                 <div>
-                    <Tex texContent={'\\vec\\theta^{i+1} = \\theta^i - \\alpha \\dfrac{\\partial E(x, \\theta^i)}{\\partial \\theta}'}/> 
+                    <MathJax.Node formula={`f\\vec\\theta^{i+1} = \\theta^i - \\alpha \\dfrac{\\partial E(x, \\theta^i)}{\\partial \\theta}`} />
                     <div style={{float: 'right'}}>[1]</div>
                 </div>
                 <Typography variant="body1">
@@ -31,7 +33,7 @@ const Gradient = (props) => {
                    ,{t('_and')} <Tex texContent={`\\alpha`} /> {t('grad.41')}.
                    {t('grad.42')} 
                 </Typography>
-                <Tex texContent={`\\lVert \\nabla f'(x) - \\nabla f'(y) \\rVert \\leq L \\lVert x - y \\rVert`}/>
+                <MathJax.Node formula={`\\lVert \\nabla f'(x) - \\nabla f'(y) \\rVert \\leq L \\lVert x - y \\rVert`}/>
                 <Typography>
                 {t('where')} <Tex texContent={'L'} /> - {t('grad.25')} <Tex texContent={`f''(x)`} /> 
                 {t('thus')} {t('so_that')} <Tex texContent={`\\alpha < \\frac{2}{L}`} />
@@ -42,7 +44,7 @@ const Gradient = (props) => {
                     {t('grad.5') } <Tex texContent={`\\vec \\theta=[w_0,w_1,...,w_n]`} />
                     {t('then') }
                 </Typography>
-                <Tex texContent={`w^k_{i+1}=w^k_i-\\alpha \\frac{\\partial E}{\\partial w^k}`} />
+                <MathJax.Node formula={`w^k_{i+1}=w^k_i-\\alpha \\frac{\\partial E}{\\partial w^k}`} />
                 <Typography>
                     {t('grad.43')}
                     <a href='https://arxiv.org/abs/1811.03804'>{t('grad.44')}</a>
@@ -53,6 +55,7 @@ const Gradient = (props) => {
                 </Typography>
 
             </Grid>
+            </MathJax.Provider>
         </Grid>
     )
 }

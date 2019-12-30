@@ -9,12 +9,15 @@ import moment from 'moment';
 
 import { makeStyles, fade, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import MLink from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 import i18n from 'i18next';
 import { useTranslation, initReactI18next } from "react-i18next";
@@ -126,7 +129,11 @@ const App = (props) => {
                 <Typography className={classes.topic}>
                     {t(topicName)}
                 </Typography>
-                <Button color="inherit" onClick={changeLanguage}>{language}</Button>                            
+                <Button color="inherit" onClick={changeLanguage}>{language}</Button>
+                <MLink href={'https://github.com/olegkleiman/MLPortal'} className={classes.home}
+                    target="_blank">
+                    <GitHubIcon  />
+                </MLink>
             </Toolbar>
         </AppBar>
         <AppDrawer isOpen={open} openChanged={drawerClosed} />
