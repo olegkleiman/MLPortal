@@ -152,7 +152,10 @@ const Classification = () => {
                     <Link to={'/grad'}>
                         {t('classification.43') }
                     </Link>
-                </Typography>                
+                </Typography>  
+                <Typography>
+                    {t('classification.44')}
+                </Typography>
             </Grid>
             </MathJax.Provider>
         </Grid>
