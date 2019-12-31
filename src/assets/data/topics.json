@@ -12,10 +12,6 @@
       "link": "/regression"
       }, 
     {
-      "title": "RigdeRegression", 
-      "link": "/ridge"
-    },
-    {
       "title": "GradientDescent",
       "link": "/grad"
     },

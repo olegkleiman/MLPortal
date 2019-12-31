@@ -12,10 +12,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
     root: {
         marginLeft: '12px',
+        marginRigth: '8px',
         marginTop: '12px'
     }
 }));
@@ -120,6 +122,10 @@ const Regression = (props) => {
                         ({t('reg.11')} <Tex texContent={`m`} />
                         {t('reg.12')} <Tex texContent={`n \\times p`} />)
                     </Typography>
+                    <Divider />
+                    <Typography> 
+                     {t('reg.16')}
+                    </Typography> 
                 </Grid>
             </MathJax.Provider>                    
         </Grid>

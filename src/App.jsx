@@ -27,7 +27,6 @@ import Home from './Home';
 import Introduction from './Introduction';
 import Classification from './Classification';
 import Regression from './Regression';
-import Ridge from './Ridge';
 import Gradient from './Gradient';
 import BackProp from './BackProp';
 import Graph from './Graph';
@@ -142,7 +141,6 @@ const App = (props) => {
             <Route path='/intro' component={Introduction} />
             <Route path='/classification' component={Classification} />
             <Route path='/regression' component={Regression} />
-            <Route path='/ridge' component={Ridge} />
             <Route path='/grad' component={Gradient} />
             <Route path='/backprop' component={BackProp} />
             <Route path='/graph' component={Graph} />
