@@ -1,8 +1,10 @@
 html {
     height: 100%;
-  }
-  body {
+    scroll-behavior: smooth; 
+}
+  
+body {
     font: 14px 'Helvetica Neue', "Segoe UI", Arial, sans-serif;
     min-height: 100%;
     margin: 0px;
-  }  
+}  

@@ -25,8 +25,34 @@ const translations = {
                 "shuffle": "Shuffle",
                 "weights": "Weights"
             },
-            "regression": {
-                "1": "Regtesssoin is the task of supervised learning where with continious target variable"
+            "reg": {
+                "topic_0": "Regression Task",
+                "topic_1": "Classical closed-form solution",
+                "topic_2": "L2 Regularization (Ridge)",
+                "topic_3": "Complexity",
+                "1": "Regresssoin is the task of supervised learning where with continious target variable",
+                "2": "This expression is called <strong>normal equation</strong> and it is closed form of the solution for linear regression",
+                "ridge": {
+                    "0": "Closed form solution",
+                    "1": "Ridge regression",
+                    "2": "If the parametrs of regression are constrained with some quadratic expression, its solutions are restricted by the area defined by such constraints. If the constraints are imposed using a quadratic function",
+                    "3": " with parameter ",
+                    "4": " (in this case the regression told to be regularized by ",
+                    "5": "), the possible solutions are limited by the multidimensional sphere with radius depends on ",
+                    "6": " Renaming loss functions and adding mentioned constraints:",
+                },
+                "3": " Till now we got a closed-form solutions both types of regressions. Now we can estimate the complexity of these solutions.",
+                "4": "The normal equation implies one operation to calculate the inverse matrix, 2 operations of matrix transposition and 3 matrix multiplication operations. Matrix inversion requires ",
+                "5": " operations. Matrix multiplication ",
+                "6": " requires ",
+                "7": " operations",
+                "8": " It's called 'normal' because the dimentionality of its right part does not depends on ",
+                "9": " one-dimension real vector (after all, it's the vector of weights)",
+                "10": " since inversion does not change dimesionality for square matix",
+                "11": " because sigle element of produced matrix requires ",
+                "12": " operations and the total of elements is ",
+                "13": "Note that normal equation assumes invertible matrix ",  
+                "14": " This restriction will be removed in the next part by imposing some constraints on regression parameters"
             },
             "grad": {
                 "1": "The main idea behind the gradient descent method is updating the vector of weights by the value opposite to gradient direction:",
@@ -78,6 +104,7 @@ const translations = {
                 "2": "backpropagation method",
                 "3": "Each node in the graph is used to indicate a variable - scalars, vectors, matrices or tensors. Edges are the operations of them."
             },
+            "if": "if",
             "where": "where ",
             "and": " and ",
             "_and": " a ",
@@ -86,6 +113,7 @@ const translations = {
             "then": ", then ",
             "although": "although",
             "solve": "Solve",
+            "indeed": "Indeed",
         }
     },
     ru: {
@@ -114,8 +142,34 @@ const translations = {
                 "shuffle": "Новые данные",
                 "weights": "Веса"
             },
-            "regression": {
-                "1": "Regtesssoin is the task of supervised learning where with continious target variable"
+            "reg": {
+                "topic_0": "Задача регрессии",
+                "topic_1": "Аналитическое решение",
+                "topic_2": "Ограничения на параметры (Гребневая регрессия)",
+                "topic_3": "Вычислительная сложность",
+                "1": "Regresssoin is the task of supervised learning where with continious target variable",
+                "2": "Полученное выражение называется <strong>normal equation</strong> представляет собой аналитическую форму решения задачи линейной регрессии",
+                "ridge": {
+                    "0": "Аналитическое решение",
+                    "1": "Гребневая регрессия",
+                    "2": "Если добавить ограничения на параметры регрессии, то решение такой задачи будет лежать только в области, определенной этими ограничениями. В частности, если ограничения наложены с помощью квадратичной функции ",
+                    "3": " с параметром ",
+                    "4": " (в этом случае говорят об ограничениях вида ",
+                    "5": "), то решения будут ограничены некоторой окружностью, радиус которой зависит от ",
+                    "6": "Переименуем функцию потерь и добавим в неё ограничения:",
+                },
+                "3": "Теперь, когда мы получили аналитические решения для обоих случаев регрессии, мы можем оценить их вычислительную сложность.",
+                "4": "Из формулы нормального уравнения следует, что нам потребуется одна операция вычисления обратной матрицы, 2 операции транспонирования и 3 операции умножения. Вычисление обратной матрицы требует  ",
+                "5": " операций. Умножение матриц размера ",
+                "6": " требует ",
+                "7": " операций",
+                "8": " Оно называется 'нормальным' потому, что размерность его правой части на зависит от ",
+                "9": "вещественный вектор (это вектор весов)",
+                "10": " поскольку операция получения обратной матрицы не изменяет размерность квадратной матрицы",
+                "11": " т.к. для получения одного элемента выходной матрицы требуется ",
+                "12": " операций, а всего элементов матрицы - ",
+                "13": "Отметим, что полученное уравнение предполагает невырожденность матрицы ",
+                "14": " Это ограничение мы снимем в следующей части, введя дополнительные требования к параметрам регрессии"
             },
             "grad": {
                 "1": "Основная идея метода градиентного спуска состоит в обновлении вектора весов на величину, обратную к направлению градиента:",
@@ -167,6 +221,7 @@ const translations = {
                 "2": "обратного распространения ошибки",
                 "3": "Узлами графа являются переменные - скаляры, векторы, матрицы и тензоры. Ребрами - операции над ними."
             },
+            "if": "если",
             "where": "где ",
             "and": " и ",
             "_and": " a ",
@@ -175,6 +230,7 @@ const translations = {
             "then": ", то ",
             "although": "хотя",
             "solve": "Решить",
+            "indeed": "В самом деле",
         }
     }
 }
