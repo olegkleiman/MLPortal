@@ -30,6 +30,7 @@ import Regression from './Regression';
 import Gradient from './Gradient';
 import BackProp from './BackProp';
 import Graph from './Graph';
+import ANN from './ANN';
 
 import topics from './assets/data/topics.json';
 
@@ -144,6 +145,7 @@ const App = (props) => {
             <Route path='/grad' component={Gradient} />
             <Route path='/backprop' component={BackProp} />
             <Route path='/graph' component={Graph} />
+            <Route path='/ann' component={ANN} />
         </Switch>
     </>
 }

@@ -6,6 +6,7 @@ import MathJax from 'react-mathjax';
 import {Tex} from 'react-tex';
 
 import Sidebar from './Sidebar';
+import RidgeImage from './assets/images/ridge.png'
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -110,6 +111,11 @@ const Regression = (props) => {
                     <MathJax.Node formula={`2X^T w - 2X^Ty + 2\\lambda w = 0 \\Rightarrow`} />
                     <MathJax.Node formula={`(X^T X + \\lambda I)w = X^Ty \\Rightarrow`} />
                     <MathJax.Node formula={`\\boxed{ w=(X^TX+\\lambda I)^{-1} \\cdot X^T \\cdot y}` } />
+                    <Typography>
+                    {t('reg.ridge.7')} <Tex texContent={`X^T X`} />.
+                    {t('reg.ridge.8')}. 
+                    </Typography>
+                    <img src={RidgeImage} width='780' />
                 </Grid>
                 <Grid item xs={12} id='complexity'>
                     <Typography variant="body1">

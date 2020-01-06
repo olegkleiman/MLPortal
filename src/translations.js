@@ -11,6 +11,7 @@ const translations = {
             "GradientDescent": "Gradient Descent",
             "BackProp": "Back-Propagation",
             "Graph": "Computational Graph",
+            "ANN": "Neural Networks",
             "intro": {
                 "1": "",
             },
@@ -22,7 +23,7 @@ const translations = {
                 "41": " Finding minimum of this function is actually its deriving with respect to each weight",  
                 "42": "Этот поиск минимума, в свою очередь, производится методом ", 
                 "43": " gradient descent",
-                "44": "Для задач классификации как правило, используется функция активации softmax",
+                "44": "Для задач классификации в качестве функция активации, как правило,  используется softmax, а в качестве функции ошибки - cross-entropy",
                 "shuffle": "Shuffle",
                 "weights": "Weights"
             },
@@ -31,16 +32,18 @@ const translations = {
                 "topic_1": "Classical closed-form solution",
                 "topic_2": "L2 Regularization (Ridge)",
                 "topic_3": "Complexity",
-                "1": "Задача регрессии, на первый взгляд, не относится к классу задач обучения с учителем. Однако если посмотреть на значения целевой функции как на метки, то все станет на свои места: Regresssoin is the task of supervised learning where with continious target variable",
-                "2": "This expression is called <strong>normal equation</strong> and it is closed form of the solution for linear regression",
+                "1": "Машинное обучение смотрит на задачу регрессии как на форму обучения с учителем. В качестве меток здесь принимаются значения целевой функции. Regresssoin is the task of supervised learning where with continious target variable",
+                "2": "This expression is called <strong>normal equation</strong> and it is closed-form of the solution for linear regression",
                 "ridge": {
-                    "0": "Closed form solution",
+                    "0": "Closed-form solution",
                     "1": "Ridge regression",
                     "2": "If the parametrs of regression are constrained with some quadratic expression, its solutions are restricted by the area defined by such constraints. If the constraints are imposed using a quadratic function",
                     "3": " with parameter ",
                     "4": " (in this case the regression told to be regularized by ",
                     "5": "), the possible solutions are limited by the multidimensional sphere with radius depends on ",
                     "6": " Renaming loss functions and adding mentioned constraints:",
+                    "7": "The regresssion described by last equation called ridge regression, its ridge is diagonal matrix that is added to matrix",
+                    "8": "The matrix produced by this add opertion is surely regular",
                 },
                 "3": " Till now we got a closed-form solutions both types of regressions. Now we can estimate the complexity of these solutions.",
                 "4": "The normal equation implies one operation to calculate the inverse matrix, 2 operations of matrix transposition and 3 matrix multiplication operations. Matrix inversion requires ",
@@ -105,7 +108,11 @@ const translations = {
             "graph": {
                 "1": "Computational graph is used for calculating the coefficients in ",
                 "2": "backpropagation method",
-                "3": "Each node in the graph is used to indicate a variable - scalars, vectors, matrices or tensors. Edges are the operations of them."
+                "3": "Each node in the graph is used to indicate a variable - scalars, vectors, matrices or tensors. Edges are the operations of them.",
+                "4": "",
+            },
+            "ann": {
+                "1": "The main component of Neural Network is perceptron",
             },
             "if": "if",
             "where": "where ",
@@ -131,6 +138,7 @@ const translations = {
             "GradientDescent": "Градиентный спуск",
             "BackProp": "Метод обратного распространения ошибки",
             "Graph": "Вычислительный граф",
+            "ANN": "Нейронные сети",
             "intro": {
                 "1": "",
             },
@@ -142,8 +150,7 @@ const translations = {
                 "41": "Минимизация этой функции сводится к нахождению ее производных по каждому из весов:",
                 "42": "Этот поиск минимума, в свою очередь, производится методом ",
                 "43": " градиентного спуска",
-                "44": "Для задач классификации как правило, используется функция активации softmax",
-                "shuffle": "Новые данные",
+                "44": "Для задач классификации в качестве функция активации, как правило,  используется softmax, а в качестве функции ошибки - cross-entropy",                "shuffle": "Новые данные",
                 "weights": "Веса"
             },
             "reg": {
@@ -151,7 +158,7 @@ const translations = {
                 "topic_1": "Аналитическое решение",
                 "topic_2": "Ограничения на параметры (Гребневая регрессия)",
                 "topic_3": "Вычислительная сложность",
-                "1": "Задача регрессии, на первый взгляд, не относится к классу задач обучения с учителем. Однако если посмотреть на значения целевой функции как на метки, то все станет на свои места: Regresssoin is the task of supervised learning where with continious target variable",
+                "1": "Машинное обучение смотрит на задачу регрессии как на форму обучения с учителем. В качестве меток здесь принимаются значения целевой функции. Regresssoin is the task of supervised learning where with continious target variable",
                 "2": "Полученное выражение называется <strong>normal equation</strong> представляет собой аналитическую форму решения задачи линейной регрессии",
                 "ridge": {
                     "0": "Аналитическое решение",
@@ -161,6 +168,8 @@ const translations = {
                     "4": " (в этом случае говорят об ограничениях вида ",
                     "5": "), то решения будут ограничены некоторой окружностью, радиус которой зависит от ",
                     "6": "Переименуем функцию потерь и добавим в неё ограничения:",
+                    "7": "Регрессия, описываемая последней формулой, называется гребневой. А гребнем выступает диагональная матрица, которую мы прибавляем к матрице",
+                    "8": "в результате получается гарантированно регулярная матрица",
                 },
                 "3": "Теперь, когда мы получили аналитические решения для обоих случаев регрессии, мы можем оценить их вычислительную сложность.",
                 "4": "Из формулы нормального уравнения следует, что нам потребуется одна операция вычисления обратной матрицы, 2 операции транспонирования и 3 операции умножения. Вычисление обратной матрицы требует  ",
@@ -224,7 +233,11 @@ const translations = {
             "graph": {
                 "1": "Вычислительный граф используется для расчета коэффициентов в методе ",
                 "2": "обратного распространения ошибки",
-                "3": "Узлами графа являются переменные - скаляры, векторы, матрицы и тензоры. Ребрами - операции над ними."
+                "3": "Узлами графа являются переменные - скаляры, векторы, матрицы и тензоры. Ребрами - операции над ними.",
+                "4": "Если у нас получится представить сложную функцию как композицию более простых, то мы сможем и эффективно вычислить ее производную по любой переменной, что и требуется для градиентного спуска. Самое удобное представление в виде композиции — это представление в виде графа вычислений. Граф вычислений — это граф, узлами которого являются функции (обычно достаточно простые, взятые из заранее фиксированного набора), а ребра связывают функции со своими аргументами.",
+            },
+            "ann": {
+                "1": "Основной компонент нейронной сети – перцептрон",
             },
             "if": "если",
             "where": "где ",
