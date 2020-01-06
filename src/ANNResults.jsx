@@ -30,7 +30,7 @@ const ANNResults = (props: Props) => {
     const classes = useStyles();
 
     const [w0, w1, w2] = weights;
-    const slope = (-w0-w1)/w2 
+    const slope = -w1/w2 
     const bias = -w0/w2
 
     const _weights = Array.from(weights); 

@@ -100,7 +100,7 @@ const translations = {
                 "1": "Этот метод является одним из самых главных алгоритмов машинного обучения. Он является алгоритмом вычисления ",
                 "2": "градиентного спуска",
                 "3": " The term 'back-propagation' is often misunderstood as meaning the whole learning algorithm for the network. Actually, back-propagation refers only to the method for computing the gradient, while another algorithms, such as SGD, is used to perform learning using this gradient.",
-                "4": "Applying ",
+                "4": "Applying ", 
                 "5": "gradient descent method ",
                 "6": " for miniization loss function defined as mean square error",
                 "7": "Now according to the chain rule of calculus:",

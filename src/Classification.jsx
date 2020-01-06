@@ -43,7 +43,7 @@ let labels = [];
 //     labels.push(label)
 // })
 
-for(let i of range(0, 8)) {
+for(let i of range(0, 18)) {
     const x = Math.round(Math.random() * 10)
     const y = Math.round(Math.random() * 10)
     data.push( {x,y} );
@@ -88,7 +88,7 @@ const Classification = () => {
         setWeights(weights);
         const _lineData = [
             {x: 0, y: -bias/w2},
-            {x: 8, y: (-bias - w1*8)/w2}
+            {x: 9, y: -w1*9/w2}
         ];
         
         setLineData(_lineData)
