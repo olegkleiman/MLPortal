@@ -31,6 +31,7 @@ import Gradient from './Gradient';
 import BackProp from './BackProp';
 import Graph from './Graph';
 import ANN from './ANN';
+import Bayes from './Bayes';
 
 import topics from './assets/data/topics.json';
 
@@ -38,7 +39,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources: translations,
-    lng: "en",
+    lng: "ru",
     debug: true,
     interpolation: {
       escapeValue: false,
@@ -90,7 +91,7 @@ const App = (props) => {
     const theme = useTheme();
 
     const [open, setOpen] = useState(false);
-    const [language, setLanguage] = useState('ru');
+    const [language, setLanguage] = useState('en');
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -146,6 +147,7 @@ const App = (props) => {
             <Route path='/backprop' component={BackProp} />
             <Route path='/graph' component={Graph} />
             <Route path='/ann' component={ANN} />
+            <Route path='/bayes' component={Bayes} />
         </Switch>
     </>
 }

@@ -12,6 +12,7 @@ const translations = {
             "BackProp": "Back-Propagation",
             "Graph": "Computational Graph",
             "ANN": "Neural Networks",
+            "Bayes": "Bayessian networks",
             "intro": {
                 "1": "",
             },
@@ -114,6 +115,17 @@ const translations = {
             "ann": {
                 "1": "The main component of Neural Network is perceptron",
             },
+            "bayes": {
+                "1": "Bayesian theorem is derived simply from the conditional probalility definition",
+                "2": "Откуда следует, что если",
+                "3": "In this expression ",
+                "4": " defines the aposteriori probablility",
+                "5": " - the apriori probalility ",
+                "6": " - the likelihood",
+                "7": " with defined",
+                "8": " In other words, Bayes theorem simply simply expresses the fact that aposteriori probability is proportional to likelihood",
+                "9": "It follows directly from here that by maximizing the likelihood we are actually maximizing the posterior probability"
+            },
             "if": "if",
             "where": "where ",
             "and": " and ",
@@ -123,6 +135,8 @@ const translations = {
             "then": ", then ",
             "although": "although",
             "solve": "Solve",
+            "select": "Select",
+            "activation_function": "Activation Function",
             "indeed": "Indeed",
         }
     },
@@ -139,6 +153,7 @@ const translations = {
             "BackProp": "Метод обратного распространения ошибки",
             "Graph": "Вычислительный граф",
             "ANN": "Нейронные сети",
+            "Bayes": "Байессовские сети",
             "intro": {
                 "1": "",
             },
@@ -239,6 +254,17 @@ const translations = {
             "ann": {
                 "1": "Основной компонент нейронной сети – перцептрон",
             },
+            "bayes": {
+                "1": "Сама по себе формула Байеса выводится из определения условной вероятности",
+                "2": "Откуда следует, что если",
+                "3": "В этом выражении ",
+                "4": " означает апостериорную вероятность",
+                "5": " - априорную вероятность ",
+                "6": " - правдоподобие",
+                "7": " при заданном",
+                "8": "Иными словами, формула Байеса просто утверждает, что апостериорная вероятность пропорциональна правдоподобию",
+                "9": "Отсюда непосредственно следует, что максимизируя правдоподобие, мы тем самым, максимизируем апостериорную вероятность",
+            },
             "if": "если",
             "where": "где ",
             "and": " и ",
@@ -248,6 +274,8 @@ const translations = {
             "then": ", то ",
             "although": "хотя",
             "solve": "Решить",
+            "select": "Выберите",
+            "activation_function": "Функция активации",
             "indeed": "В самом деле",
         }
     }

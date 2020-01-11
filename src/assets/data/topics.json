@@ -26,5 +26,9 @@
     {
       "title": "ANN",
       "link": "/ann"
+    },
+    {
+      "title": "Bayes",
+      "link": "/bayes"
     }
 ]

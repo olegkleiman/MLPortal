@@ -6,14 +6,15 @@ class Perceptron {
                 inputs_len,
                 learning_rate = 0.01) {
 
-        tf.setBackend('webgl');
-        console.log('Backend: ' + tf.getBackend());
+        // tf.setBackend('webgl');
+        // console.log('Backend: ' + tf.getBackend());
 
         this.weights = tf.variable( tf.randomNormal([inputs_len+1]) );
         this.activationFunction = activationFunction;
         this.learning_rate = tf.tensor1d([learning_rate]);
         this.loss = tf.variable( tf.tensor1d([.0]) )
         this.epochs = 50
+
     }   
 
     train_step() {
@@ -22,7 +23,8 @@ class Perceptron {
 
     predict(input) {
         const sum = input.dot(this.weights);
-        return this.activationFunction(sum);
+        // return this.activationFunction(sum);
+        return this.activationFunction.func(sum)
     }
     
     _train(data, labels, callback) {
@@ -34,9 +36,13 @@ class Perceptron {
                 let [sample, label] = item;
                 const prediction = this.predict(tf.tensor(sample))
                 const error = tf.tensor1d([label]).sub(prediction);
-                this.loss.assign( this.loss.add(error.mul(error)) );
+                // this.loss.assign( this.loss.add(error.mul(error)) );
                 const _sample= tf.tensor(sample);
-                const delta = this.weights.add(error.mul(this.learning_rate).mul(_sample));
+                // const delta = this.weights.add(error.mul(this.learning_rate).mul(_sample));
+                const delta = this.weights.add(error.mul(this.learning_rate)
+                                                .mul(this.activationFunction.derivative())
+                                                .mul(_sample)
+                                              );
                 
                 this.weights.assign(delta)
             })

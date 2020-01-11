@@ -10,6 +10,9 @@ import {XYPlot, YAxis, XAxis,
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';  
 
 import {Tex} from 'react-tex';
@@ -43,9 +46,9 @@ let labels = [];
 //     labels.push(label)
 // })
 
-for(let i of range(0, 18)) {
-    const x = Math.round(Math.random() * 10)
-    const y = Math.round(Math.random() * 10)
+for(let i of range(0, 100)) {
+    const x = Math.round(Math.random() * 50)
+    const y = Math.round(Math.random() * 50)
     data.push( {x,y} );
     let label = x < y ? 1 : 0;
     labels.push(label)
@@ -58,12 +61,28 @@ const dataClassB = data.filter( point => {
     return point.x >= point.y
 })
 
+const activationFunctions = [{
+        value: 'sigmoid',
+        label: 'sigmoid',
+        func: ActivationFunctions.sigmoid
+    }, {
+        value: 'tanh',
+        label: 'tanh',
+        func: ActivationFunctions.tanh
+    }, {
+        value: 'ReLU',
+        label: 'ReLU',
+        func: ActivationFunctions.relu
+    }
+]
+
 const Classification = () => {
 
     const { t } = useTranslation();
 
     const [lineData, setLineData] = useState()
     const [weights, setWeights] = useState();
+    const [activationFunctionName, setActivationFunctionName] = useState(activationFunctions[0].value);
 
     const reStart = (ev) => {
         console.log(ev)
@@ -77,7 +96,11 @@ const Classification = () => {
         const x_data = data.map( item => [1, item.x] )
         const y_data = data.map( item => [item.y] )
         const _data = data.map( item => [1, item.x, item.y])
-        const p = new Perceptron(ActivationFunctions.sigmoid, 2);
+        const _activationFunction = activationFunctions.find( item => {
+            return activationFunctionName == item.label ? true : false
+        }) 
+        const sigmoid = ActivationFunctions.SIGMOID;
+        const p = new Perceptron(sigmoid, 2);
         p._train(_data, labels, redraw);
     }
 
@@ -88,17 +111,39 @@ const Classification = () => {
         setWeights(weights);
         const _lineData = [
             {x: 0, y: -bias/w2},
-            {x: 9, y: -w1*9/w2}
+            {x: 50, y: -w1*50/w2}
         ];
         
         setLineData(_lineData)
     }
 
+    const onActivationFunctionChanged = event => {
+        setActivationFunctionName(event.target.value)
+    }
+
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} alignContent={'center'}
+            >
             <MathJax.Provider>
-            <Grid item>
-                <XYPlot height={300} width={300}>
+            <Grid item xs={5}>
+                <Box>
+                <TextField 
+                    value={activationFunctionName}
+                    label={t('select')}
+                    select
+                    onChange={onActivationFunctionChanged}
+                    helperText={t('activation_function')}
+                    >
+                    {
+                        activationFunctions.map( (item, index) => {
+                            return <MenuItem key={index} value={item.value}>
+                                        {item.label}
+                                    </MenuItem>
+                        })
+                    }
+                </TextField>    
+                </Box>
+                <XYPlot height={400} width={400}>
                     <MarkSeries animation={'noWobble'}
                                 className="responsive-vis-scatterplot"
                                 colorType="literal"
@@ -124,13 +169,13 @@ const Classification = () => {
                 </Button>
                 <ANNResults weights={weights} />
             </Grid>
-            <Grid item xs>
+            <Grid item xs={7}>
                 <Typography variant="body1">
                     <Trans i18nKey="classification.1">
                         {t('classification.1')}
                     </Trans>
                 </Typography> 
-                <MathJax.Node formula={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />,
+                <MathJax.Node formula={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />
                 <Typography>
                     {t('where') } 
                     <Tex texContent={`\\hat y`} /> 
