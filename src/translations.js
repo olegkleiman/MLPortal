@@ -119,12 +119,16 @@ const translations = {
                 "1": "Bayesian theorem is derived simply from the conditional probalility definition",
                 "2": "Откуда следует, что если",
                 "3": "In this expression ",
-                "4": " defines the aposteriori probablility",
+                "4": " defines the a-posteriori probablility of the hypothesis ",
                 "5": " - the apriori probalility ",
-                "6": " - the likelihood",
+                "6": " - the likelihood of the hypothesis ",
                 "7": " with defined",
                 "8": " In other words, Bayes theorem simply simply expresses the fact that aposteriori probability is proportional to likelihood",
-                "9": "It follows directly from here that by maximizing the likelihood we are actually maximizing the posterior probability"
+                "9": "It follows directly from here that by maximizing the likelihood we are actually maximizing the posterior probability",
+                "10": " вычисляется по формуле полной вероятности события, зависящего от нескольких несовместимых гипотез, имеющих суммарную вероятность 1",
+                "sample": {
+                    "1": "There are consecutive numbers in three boxes. In the first box, there are numbers 1,2,3,4. In the seconds box - 1,2,3,4,5,6. In the third box - 1,2,3,4,5,6,7,8"
+                }
             },
             "if": "if",
             "where": "where ",
@@ -138,6 +142,7 @@ const translations = {
             "select": "Select",
             "activation_function": "Activation Function",
             "indeed": "Indeed",
+            "sample": "Sample"
         }
     },
     ru: {
@@ -258,12 +263,16 @@ const translations = {
                 "1": "Сама по себе формула Байеса выводится из определения условной вероятности",
                 "2": "Откуда следует, что если",
                 "3": "В этом выражении ",
-                "4": " означает апостериорную вероятность",
+                "4": " означает апостериорную вероятность гипотезы",
                 "5": " - априорную вероятность ",
-                "6": " - правдоподобие",
+                "6": " - правдоподобие гипотезы ",
                 "7": " при заданном",
                 "8": "Иными словами, формула Байеса просто утверждает, что апостериорная вероятность пропорциональна правдоподобию",
                 "9": "Отсюда непосредственно следует, что максимизируя правдоподобие, мы тем самым, максимизируем апостериорную вероятность",
+                "10": " вычисляется по формуле полной вероятности события, зависящего от нескольких несовместимых гипотез, имеющих суммарную вероятность 1",
+                "sample": {
+                    "1": "Из трех коробочек можно вытащить любую из последовательных цифр. Из первой коробочки - 1,2,3,4. Из второй - 1,2,3,4,5,6 и из третьей - 1,2,3,4,5,6,7,8. Сначала случайным образом выбирается коробочка, а затем зрителю демонстрируется выбранная цифра - 2. Найти вероятность того, что предъявленная двойка была выбрана из первой коробочки."
+                }
             },
             "if": "если",
             "where": "где ",
@@ -277,6 +286,7 @@ const translations = {
             "select": "Выберите",
             "activation_function": "Функция активации",
             "indeed": "В самом деле",
+            "sample": "Пример"
         }
     }
 }
