@@ -171,9 +171,7 @@ const Classification = () => {
             </Grid>
             <Grid item xs={7}>
                 <Typography variant="body1">
-                    <Trans i18nKey="classification.1">
-                        {t('classification.1')}
-                    </Trans>
+                    <Trans i18nKey="classification.1" />
                 </Typography> 
                 <MathJax.Node formula={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />
                 <Typography>

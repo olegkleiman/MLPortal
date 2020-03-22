@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import MathJax from 'react-mathjax';
 import {Tex} from 'react-tex';
 
-import BackPropImage from './assets/images/backprop.mp4';
+import BackPropImage from './assets/videos/backprop.mp4';
 import ReactPlayer from 'react-player'
 
 const BackProp = (props) => {
@@ -61,9 +61,7 @@ const BackProp = (props) => {
                     {t('grad.11')}
                 </Typography>
                 <Typography>
-                    <Trans i18nKey="grad.12'">
-                        {t('grad.12')}
-                    </Trans>
+                    <Trans i18nKey='grad.12' />
                 </Typography>
                 <MathJax.Node formula={`\\delta^k_j = \\frac{\\partial E}{\\partial S^k_j}`} /> 
                 <Typography>

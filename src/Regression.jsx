@@ -70,9 +70,7 @@ const Regression = (props) => {
                     <MathJax.Node formula={`2X^T X w - 2X^T y + 0 \\Rightarrow`} />
                     <MathJax.Node formula={`\\boxed{ \\mathbf w = (X^T\\cdot X)^{-1} \\cdot X^T \\cdot y}`} />
                     <Typography>
-                        <Trans i18nKey="reg.2'">
-                            {t('reg.2')}
-                        </Trans>.
+                        <Trans i18nKey='reg.2' />
                         {t('reg.8')} <Tex texContent={`n`} />. 
                         { t('indeed')}, {t('if')} <Tex texContent={`dim[X] = m \\times n`} />, {t('_and')} 
                         <Tex texContent={`y`} /> - {t('reg.9')} {t('then')}
