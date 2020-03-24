@@ -1,5 +1,5 @@
 // @flow
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from "react-i18next";
 import '../node_modules/react-vis/dist/style.css';
@@ -21,6 +21,9 @@ import MathJax from 'react-mathjax';
 import Perceptron from './Perceptron';
 import * as ActivationFunctions from './ActivationFunctions';
 import ANNResults from './ANNResults';
+
+import * as tf from '@tensorflow/tfjs';
+import * as tfvis from '@tensorflow/tfjs-vis'
 
 function* range(start, end) {
     for (let i = start; i <= end; i++) {
@@ -80,9 +83,64 @@ const Classification = () => {
 
     const { t } = useTranslation();
 
+    const [trainSet, setTrainSet] = useState();
+    const [trainLabels, setTrainLabels] = useState();
+
+    const [testSet, setTestSet] = useState();
+    const [testLabels, setTestLabels] = useState();
+
+    const [classAValues, setClassAValues] = useState();
+    const [classBValues, setClassBValues] = useState();
     const [lineData, setLineData] = useState()
     const [weights, setWeights] = useState();
     const [activationFunctionName, setActivationFunctionName] = useState(activationFunctions[0].value);
+
+    useEffect( () => {
+
+        const TRAIN_SET_SIZE = 100
+        let _dataSet = generateDataSet(TRAIN_SET_SIZE, [-1.,-1.], [1.,1.]) // returns 2D tensor with shape(200,3)
+        let slice = _dataSet.slice([0,0], [TRAIN_SET_SIZE * 2,2]) // get values only - slice array of (200,2) from start point (0,0)
+        setTrainSet(slice); 
+        slice = _dataSet.slice([0,0], [100,2]); // slice array of (100,2) from start point (0,0)
+        setClassAValues(slice)
+        slice = _dataSet.slice([100, 0], [100, 2]); // slice array of (100,2) from start point (100,0)
+        setClassBValues(slice)
+
+        const _labels = _dataSet.slice([0,2], 200)
+        setTrainLabels(_labels);
+
+        const TEST_SET_SIZE = 20
+        // Generate validation set
+        _dataSet = generateDataSet(TEST_SET_SIZE, [-1.,-1.], [1.,1.]) // <= tensor2d
+        slice = _dataSet.slice([0,0], [TEST_SET_SIZE * 2, 2])
+        setTestSet(slice);
+    }, [])
+
+    const getClassAValues = () => {
+        const tensor = classAValues;
+        if( tensor ) {
+            const _data = tensor.arraySync()
+            return _data.map( item => {
+                return {
+                    x: item[0],
+                    y: item[1]
+                }
+            })
+        }
+    }
+
+    const getClassBValues = () => {
+        const tensor = classBValues;
+        if( tensor ) {
+            const _data = tensor.arraySync()
+            return _data.map( item => {
+                return {
+                    x: item[0],
+                    y: item[1]
+                }
+            })
+        }        
+    }
 
     const reStart = (ev) => {
         console.log(ev)
@@ -90,6 +148,86 @@ const Classification = () => {
 
     const valueClick = (datapoint, event) => {
         console.log(datapoint);
+    }
+
+    const onBatchEnd = (batch, logs) => {
+        console.log('Accuracy', logs.acc);
+    }
+
+    const generateDataSet = (N, point0, point1) => {
+        const _data1 = tf.randomNormal(
+            [N, 2], // shape 
+            point0[0], // mean
+            1, // stdDev
+            'float32' //dtype 
+        );
+        const _data2 = tf.randomNormal([N, 2], point1[0], 1, 'float32');
+        const axis = 0;
+        const _values = _data1.concat(_data2, axis)
+
+        const _labels1 = tf.zeros([N,1])    
+        const _labels2 = tf.ones([N,1])
+        const _labels = _labels1.concat(_labels2, axis)
+
+        return _values.concat(_labels, 1);
+     
+    }
+
+    const buildModel = async () => {
+
+
+        // Layers API:
+        // see https://www.tensorflow.org/js/guide/train_models for start point
+        const model = tf.sequential(
+            {
+                layers: [
+                    tf.layers.dense({
+                        inputShape: [2], units: 1, activation: 'relu'
+                    }),
+                    // Add an output layer
+                    // tf.layers.dense({units: 1, useBias: true}))  
+                ]
+            }
+        )
+
+        model.compile({loss: 'binaryCrossentropy', 
+                        optimizer: 'sgd', 
+                        metrics: ['accuracy']});
+
+        const info = await model.fit(trainSet, trainLabels, {
+            epochs: 100,
+            batchSize: 16,
+            callbacks: {onBatchEnd},
+            validationData: testSet
+        })
+        const surface = tfvis.visor().surface({ name: 'Accuracy', tab: 'Charts' });
+
+        console.log('Final accuracy:', info.history.acc[info.history.acc.length-1]);
+        const accuMetrics = info.history.acc.map( (item, index) => {
+            return {
+                index: index,
+                value: item
+            }
+        })
+        // tfvis.render.linechart(surface, data, { zoomToFit: true });
+        tfvis.render.barchart(surface, accuMetrics, {});
+
+        // const lossMetrics = info.history.loss.map( (item, index) => {
+        //     return {
+        //         index: index,
+        //         value: item
+        //     }
+        // });
+        // tfvis.render.barchart(surface, lossMetrics, {});
+
+        const predictions = model.predict(testSet, {
+            verbose: true
+        });
+        predictions.print();
+    }
+
+    const classifyTF =async () => {
+        await buildModel();
     }
 
     const classify = () => {
@@ -149,13 +287,13 @@ const Classification = () => {
                                 colorType="literal"
                                 color='green'
                                 onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
-                                data={dataClassA} />
+                                data={getClassAValues()} />
                     <MarkSeries animation={'noWobble'}
                                 className="responsive-vis-scatterplot"
                                 colorType="literal"
                                 color='blue'
                                 onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
-                                data={dataClassB} />                            
+                                data={getClassBValues()} />                            
                     <LineSeries data={lineData} color='red'/> 
                     <VerticalGridLines />
                     <HorizontalGridLines />                          
@@ -163,7 +301,7 @@ const Classification = () => {
                     <YAxis />                    
                 </XYPlot>
                 <Button variant="outlined" color="primary"
-                        onClick={ () => classify() }>{t('solve')}</Button>
+                        onClick={ () => classifyTF() }>{t('solve')}</Button>
                 <Button variant="outlined" color="primary"
                     onClick={ (ev) => reStart(ev)}>{t('classification.shuffle')}
                 </Button>
