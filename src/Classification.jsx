@@ -25,45 +25,6 @@ import ANNResults from './ANNResults';
 import * as tf from '@tensorflow/tfjs';
 import * as tfvis from '@tensorflow/tfjs-vis'
 
-function* range(start, end) {
-    for (let i = start; i <= end; i++) {
-        yield i;
-    }
-}
-
-let data = [];
-
-// let data = [{x:1, y:6},
-//                 {x:6,y:2},
-//                 {x:7,y:7},
-//                 {x:7,y:0},
-//                 {x:9,y:1},
-//                 {x:7,y:3},
-//                 {x:2,y:10},
-//                 {x:0,y:5},
-//                 {x:4,y:6}];
-let labels = [];
-
-// data.forEach( (el) => {
-//     let label = (el.x < el.y) ? 1 : 0;
-//     labels.push(label)
-// })
-
-for(let i of range(0, 100)) {
-    const x = Math.round(Math.random() * 50)
-    const y = Math.round(Math.random() * 50)
-    data.push( {x,y} );
-    let label = x < y ? 1 : 0;
-    labels.push(label)
-}
-
-const dataClassA = data.filter( point => {
-    return point.x < point.y
-})
-const dataClassB = data.filter( point => {
-    return point.x >= point.y
-})
-
 const activationFunctions = [{
         value: 'sigmoid',
         label: 'sigmoid',
@@ -78,6 +39,8 @@ const activationFunctions = [{
         func: ActivationFunctions.relu
     }
 ]
+
+const MODEL_NAME = 'me_classification_2D'
 
 const Classification = () => {
 
@@ -173,7 +136,7 @@ const Classification = () => {
      
     }
 
-    const buildModel = async () => {
+    const buildModel = () => {
 
 
         // Layers API:
@@ -182,7 +145,7 @@ const Classification = () => {
             {
                 layers: [
                     tf.layers.dense({
-                        inputShape: [2], units: 1, activation: 'relu'
+                        inputShape: [2], units: 1, activation: 'sigmoid'
                     }),
                     // Add an output layer
                     // tf.layers.dense({units: 1, useBias: true}))  
@@ -193,53 +156,62 @@ const Classification = () => {
         model.compile({loss: 'binaryCrossentropy', 
                         optimizer: 'sgd', 
                         metrics: ['accuracy']});
+        return model;                        
 
-        const info = await model.fit(trainSet, trainLabels, {
-            epochs: 100,
-            batchSize: 16,
-            callbacks: {onBatchEnd},
-            validationData: testSet
-        })
-        const surface = tfvis.visor().surface({ name: 'Accuracy', tab: 'Charts' });
+    }
 
-        console.log('Final accuracy:', info.history.acc[info.history.acc.length-1]);
-        const accuMetrics = info.history.acc.map( (item, index) => {
-            return {
-                index: index,
-                value: item
-            }
-        })
-        // tfvis.render.linechart(surface, data, { zoomToFit: true });
-        tfvis.render.barchart(surface, accuMetrics, {});
+    const classifyTF = async () => {
 
-        // const lossMetrics = info.history.loss.map( (item, index) => {
-        //     return {
-        //         index: index,
-        //         value: item
-        //     }
-        // });
-        // tfvis.render.barchart(surface, lossMetrics, {});
+        let model;
+        try {
+           model  = await tf.loadLayersModel('indexeddb://' + MODEL_NAME);
+        }
+        catch(ex) {
 
-        const predictions = model.predict(testSet, {
+            model = buildModel();
+
+            const info = await model.fit(trainSet, trainLabels, {
+                epochs: 100,
+                batchSize: 16,
+                callbacks: {onBatchEnd},
+                validationData: testSet
+            })
+            await model.save('indexeddb://' + MODEL_NAME)
+
+            const surface = tfvis.visor().surface({ name: 'Accuracy', tab: 'Charts' });
+
+            console.log('Final accuracy:', info.history.acc[info.history.acc.length-1]);
+            const accuMetrics = info.history.acc.map( (item, index) => {
+                return {
+                    index: index,
+                    value: item
+                }
+            })
+            // tfvis.render.linechart(surface, data, { zoomToFit: true });
+            tfvis.render.barchart(surface, accuMetrics, {});
+
+            // const lossMetrics = info.history.loss.map( (item, index) => {
+            //     return {
+            //         index: index,
+            //         value: item
+            //     }
+            // });
+            // tfvis.render.barchart(surface, lossMetrics, {});
+        }
+
+        const predictions = model.predict(tf.tensor2d([[-1., -1.], [1., 1.], [0.5,0.5]], [3,2]), {
+        // const predictions = model.predict(testSet, {
+            batchSize: 4,
             verbose: true
         });
         predictions.print();
-    }
+        const res = predictions.argMax(1)
+        res.print()
 
-    const classifyTF =async () => {
-        await buildModel();
-    }
+        
 
-    const classify = () => {
-        const x_data = data.map( item => [1, item.x] )
-        const y_data = data.map( item => [item.y] )
-        const _data = data.map( item => [1, item.x, item.y])
-        const _activationFunction = activationFunctions.find( item => {
-            return activationFunctionName == item.label ? true : false
-        }) 
-        const sigmoid = ActivationFunctions.SIGMOID;
-        const p = new Perceptron(sigmoid, 2);
-        p._train(_data, labels, redraw);
+        console.log(tf.memory())
+
     }
 
     const redraw = async (coefficients) => {
