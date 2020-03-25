@@ -7,13 +7,16 @@ import {XYPlot, YAxis, XAxis,
         VerticalGridLines,
         HorizontalGridLines,
         MarkSeries, LineSeries, LabelSeries} from 'react-vis';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';  
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 import {Tex} from 'react-tex';
 import MathJax from 'react-mathjax';
@@ -42,9 +45,19 @@ const activationFunctions = [{
 
 const MODEL_NAME = 'me_classification_2D'
 
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
+
 const Classification = () => {
 
+    const classes = useStyles();
     const { t } = useTranslation();
+
+    const [openBackdrop, setOpenBackdrop] = useState(false); // material-ui loader
 
     const [trainSet, setTrainSet] = useState();
     const [trainLabels, setTrainLabels] = useState();
@@ -162,6 +175,8 @@ const Classification = () => {
 
     const classifyTF = async () => {
 
+        setOpenBackdrop(true);
+
         let model;
         try {
            model  = await tf.loadLayersModel('indexeddb://' + MODEL_NAME);
@@ -208,9 +223,9 @@ const Classification = () => {
         const res = predictions.argMax(1)
         res.print()
 
-        
-
         console.log(tf.memory())
+
+        setOpenBackdrop(false);
 
     }
 
@@ -253,25 +268,30 @@ const Classification = () => {
                     }
                 </TextField>    
                 </Box>
-                <XYPlot height={400} width={400}>
-                    <MarkSeries animation={'noWobble'}
-                                className="responsive-vis-scatterplot"
-                                colorType="literal"
-                                color='green'
-                                onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
-                                data={getClassAValues()} />
-                    <MarkSeries animation={'noWobble'}
-                                className="responsive-vis-scatterplot"
-                                colorType="literal"
-                                color='blue'
-                                onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
-                                data={getClassBValues()} />                            
-                    <LineSeries data={lineData} color='red'/> 
-                    <VerticalGridLines />
-                    <HorizontalGridLines />                          
-                    <XAxis />        
-                    <YAxis />                    
-                </XYPlot>
+                <div>
+                    <XYPlot height={400} width={400}>
+                        <MarkSeries animation={'noWobble'}
+                                    className="responsive-vis-scatterplot"
+                                    colorType="literal"
+                                    color='green'
+                                    onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
+                                    data={getClassAValues()} />
+                        <MarkSeries animation={'noWobble'}
+                                    className="responsive-vis-scatterplot"
+                                    colorType="literal"
+                                    color='blue'
+                                    onValueClick={ (datapoint, event) => valueClick(datapoint, event) }
+                                    data={getClassBValues()} />                            
+                        <LineSeries data={lineData} color='red'/> 
+                        <VerticalGridLines />
+                        <HorizontalGridLines />                          
+                        <XAxis />        
+                        <YAxis />                    
+                    </XYPlot>
+                    <Backdrop className={classes.backdrop} open={openBackdrop}>
+                        <CircularProgress color="inherit" />
+                    </Backdrop>                
+                </div>
                 <Button variant="outlined" color="primary"
                         onClick={ () => classifyTF() }>{t('solve')}</Button>
                 <Button variant="outlined" color="primary"
@@ -281,31 +301,47 @@ const Classification = () => {
             </Grid>
             <Grid item xs={7}>
                 <Typography variant="body1">
-                    <Trans i18nKey="classification.1" />
+                    <Trans i18nKey="classification.common.1" />
+                    <Trans i18nKey="classification.common.2" />
                 </Typography> 
-                <MathJax.Node formula={`E=\\frac{1}{n} \\sum(y-\\hat y)^2`} />
+                <Typography variant="body1">   
+                    <Trans i18nKey="classification.common.3" />
+                </Typography> 
+                <MathJax.Node formula={`D_{KL} = \\sum_{i} p(x_i) log(\\frac{p(x_i)}{q(x_i)}`} />
                 <Typography>
                     {t('where') } 
-                    <Tex texContent={`\\hat y`} /> 
+                    <Tex texContent={`P`} /> 
                     {t('classification.2') }
-                    {t('and') } 
-                    <Tex texContent={`y`} /> 
+                    <Tex texContent={`Q`} /> 
                     {t('classification.3') } 
                 </Typography>
                 <Typography>
                     {t('classification.4') }
-                    <Tex texContent={`J(w)`} />
+                </Typography>                    
+                <MathJax.Node formula={`D_{KL} = \\int_X p(x) \\log(\\frac{p(x)}{q(x)} dx`} />
+                <Typography>
+                    <Trans i18nKey="classification.40" /> 
+                    <Tex texContent={`X = R^d`} />.
                 </Typography>
                 <Typography>
                     {t('classification.41') }
                 </Typography>
-                <Tex texContent={`J'(w)=0`} />
+                <MathJax.Node formula={`H(p,q)=\\mathbb{E}_p[-log(q)] = - \\sum_y p(y) \\log q(y) `} />
                 <Typography>
                     {t('classification.42') }  
-                    <Link to={'/grad'}>
-                        {t('classification.43') }
-                    </Link>
-                </Typography>  
+                </Typography>
+                <MathJax.Node formula={`D_{KL}(P|Q)= \\sum_y p(y) \\log \\frac{p(y)}{q(y)} = \\sum_y p(y) \\log p(y) - \\sum_y p(y) \\log q(y) = H(p) + H(p,q)`} />  
+                <Typography>
+                    {t('classification.5') }  <Tex texContent={`D = \\{ (x_i, y_i \\}_{i=1}^N`} />  
+                    {t('classification.51') }
+                </Typography>
+                <MathJax.Node formula={`L(\\theta) = H(p_{data},q(\\theta)) = -\\frac{1}{N} \\sum_{i=1}^N (y_i \\log \\hat y_i(\\theta) + (1-y_i) \\log(1-\\hat y(\\theta) ))`} />
+                <Typography>
+                    {t('where') }  <Tex texContent={`\\hat y_i(\\theta)`} /> {t('classification.52') }
+                </Typography>    
+                <Link to={'/grad'}>
+                    {t('classification.43') }
+                </Link>
                 <Typography>
                     {t('classification.44')}
                 </Typography>

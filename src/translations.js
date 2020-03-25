@@ -5,6 +5,7 @@ const translations = {
             "Home": "Home",
             "PortalName": "ML Portal",
             "Intro": "Introduction",
+            "Basic": "Basic concepts",
             "Regression": "Regression",
             "Classification": "Classification",
             "RigdeRegression": "Rigde Regression",
@@ -14,15 +15,27 @@ const translations = {
             "ANN": "Neural Networks",
             "Bayes": "Bayessian networks",
             "intro": {
-                "1": "",
+                "1": "Basic terms",
+                "terms": {
+                    "1" : "Information Entropy. The basic intuition behind entropy is that learning that an unlikely event has occurred is more informative than learning that a likely event has occured",
+                    "2" : "Likelihood. While probability is a prediction of the values of a random variable based on the law of its distribution, the likelihood consists in the inverse operation of estimating the probability from available data",
+                }                
             },
             "classification": {
-                "1": "Classification is the task of supervised learning with <strong>discrete</strong> target variable.",
-                "2": " - исходное значение из выборки",
-                "3": " - значение, полученное алгоритмом приближения",
-                "4": " The error calculated such a way depends on the weights and hence there is a loss funtion that usually expressed as:",
+                "common": {
+                    "1": "Classification is the task of supervised learning with <strong>discrete</strong> target variable.",
+                    "2": " If we apply the probabilistic approach, it turns out that the classification problem can be looked like this:",
+                    "3": " - labels can be considered the values of some function of a random variable, given the probability of obtaining this label on the entire set. Then a “measure” of the error of such a distribution can be a some modification of its informational entropy, that is, a value that determines how much the desired distribution differs from the obtained one. Such a value is the Kullback-Leibler divergence (for discrete case):"
+                },                
+                "2": " - is a-priori distribution,",
+                "3": " - is the expected (verified) distribution defined on the common sample space.",
+                "4": " For the continuous case, Kullback-Leibler divergence is defined as: ",
+                "40": "Here X defines the entire sample space, in particular it is usually accepted ",
                 "41": " Finding minimum of this function is actually its deriving with respect to each weight",  
-                "42": "Этот поиск минимума, в свою очередь, производится методом ", 
+                "42": "This function is just easier to minimize. Its relation with the Kullback-Leibler divergence is given by the following equalities:",
+                "5": "For binary classification, an objective function that is minimized on a datasetÍ",
+                "51": "usually looks like the average cross-entropy over all data points:",
+                "52": " - probability estimation of response 1 calculated by the classifier.",
                 "43": " gradient descent",
                 "44": "Для задач классификации в качестве функция активации, как правило,  используется softmax, а в качестве функции ошибки - cross-entropy",
                 "shuffle": "Shuffle",
@@ -151,6 +164,7 @@ const translations = {
             "Home": "",
             "PortalName": "ML Portal (ru)",
             "Intro": "Введение",
+            "Basic": "Основные идеи",
             "Regression": "Регрессия",
             "Classification": "Классификация",
             "RigdeRegression": "Гребневая регрессия",
@@ -160,17 +174,30 @@ const translations = {
             "ANN": "Нейронные сети",
             "Bayes": "Байессовские сети",
             "intro": {
-                "1": "",
+                "1": "Основные понятия",
+                "terms": {
+                    "1" : "<strong>Информационная энтропия</strong> выражает ту простую мысль, что чем реже встречается событие, тем более оно информативно ",
+                    "2" : "<strong>Правдоподобие.</strong> В то время как вероятность это предсказание значений случайной величины на основании закона её распределения, правдоподобие состоит в обратной операции - оценки вероятности по имеющимся данным",
+                }
             },
             "classification": {
-                "1": "Классификация является задачей машинного обучения с <strong>дискретным</strong> набором выходных значений (меток). Как и для задачи регрессии, основой решения будет воссоздание функции зависимости. Для этого строится разделяющая прямая/плоскость/гипер-плоскость/гипер-поверхность, которая является приближением исходной зависимости в смысле минимизации средне-квадратичного отклонения ошибки:",
-                "2": " - исходное значение из выборки",
-                "3": " - значение, полученное алгоритмом приближения.",
-                "4": "Поскольку ошибка, рассчитываемая таким образом, зависит от весов, говорят о функции потерь (loss funtion), как зависящей от весов и её обозначают ",
-                "41": "Минимизация этой функции сводится к нахождению ее производных по каждому из весов:",
-                "42": "Этот поиск минимума, в свою очередь, производится методом ",
+                "common":  {
+                    "1": "Классификация является задачей машинного обучения с дискретным набором выходных значений (меток). Такая постановка задачи существенно влияет на выбор функции ошибки: очевидно, что среднеквадратичное отклонение не подходит на эту роль, как и не подходит метод считать ошибкой количество правильных ответов. В последнем случае, такая функция ошибки будет кусочно-постоянной с производной равной нулю везде, кроме тех точек, где она вообще не определена.",
+                    "2": " Если же применить вероятностный подход, то окажется, что на задачу классификации можно смотреть так:",
+                    "3": " - метки можно считать значениями некоторой функции случайной величины, заданной вероятностью получения данной метки на всем наборе. Тогда 'мерой' ошибки такого распределения может служить некоторая модификация его информационной энтропии, т. е. величина, определяющая насколько искомое распределение отличается от полученного. Такой величиной является дивергенция Кульбака-Лейблера (для дискретного случая): ",
+                },
+                "2": " - априори распределение, ",
+                "3": " - предпологаемое (проверяемое) распределение, определенные на общем пространстве исходов.",
+                "4": " Для непрерывного случая дивергенция Кульбака-Лейблера определяется как: ",
+                "40": "Здесь X определяет все пространство исходов, в частности, обычно принимается ",
+                "41": "В задачах машинного обучения обучения используется тесно связанная с дивергенцией Кульбака-Лейблера перекрестная энтропия:",
+                "42": "Такую функцию проще минимизировать. Её связь с дивергенцией Кульбака-Лейблера дается следующими равенствами:",
+                "5": "Для бинарной классификации целевая функция, которую минимизируют на наборе данных",
+                "51": "обычно выглядит как средняя перекрестная энтропия по всем точкам данных:",
+                "52": " - оценка вероятности ответа 1, полученная классификатором.",
                 "43": " градиентного спуска",
-                "44": "Для задач классификации в качестве функция активации, как правило,  используется softmax, а в качестве функции ошибки - cross-entropy",                "shuffle": "Новые данные",
+                "44": "Для задач классификации в качестве функция активации, как правило,  используется softmax, а в качестве функции ошибки - cross-entropy",                
+                "shuffle": "Новые данные",
                 "weights": "Веса"
             },
             "reg": {
